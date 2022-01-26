@@ -1,0 +1,784 @@
+-----------------------------------------
+Learning vue.js from scratch to master
+-----------------------------------------
+all examples are inside the app.js file
+
+1- Install vue DevTools in our browser, allowing us to inspect and debug our vue applications
+in a more user-friendly interface.
+
+2- What is vue?
+Vue is a frontend Javascript Framework for building websites or user interfaces
+=> Generally it used to create single-page apps that run on the client, but also used to create
+full stack applications by making HTTP requests to a backend server.
+
+=>Vue can also run on server side by using SSR framework like nuxt.
+
+3- Why use vue?
+	* Create dynamic frontend apps and websites
+	* Easy learning curve
+	* Easy to integrate with other projects
+	* Fast and lightweight
+	* Virtual DOM
+	* Extremely popular
+	* Great community
+
+4- Single Page Application (SPA):
+- Only a single HTML page sent (initilly) to the browser
+- Vue intercepts subsequent requests and handles "page" changes in the browser by swapping what
+components are shown on the page.
+- Results in a much faster and smoother website experience
+
+5- The composition API
+=> Improves on reusability, organization & readability
+=> It does this by giving us a new setup() function 
+
+6- Vue.js the basic:
+
+	a) To create a vue app:
+	const app = Vue.createApp();  //Here we create the app
+	app.mount("#app"); //then mount the app in #app element in the DOM
+
+	DOM:
+	<div id="#app"></div>
+
+	NB: after setting that vuejs can control anything inside the div#app element.
+	Inside of createApp we can pass data and functions
+
+	const app = Vue.createApp({
+		//data, functions, template,...
+	});
+
+	const app = Vue.createApp({
+		//data, functions
+		template:"<h2>I am a template</h2>"
+	});
+
+	NB: the template is inject inside the div#app element in the DOM
+	
+	b) Data and template:
+	data() function should returns a data object. 
+	Example:
+	JS:
+	const app = Vue.createApp({
+		data(){
+			return {
+				title:"Learning Vue.js from scratch to pro",
+				author:"Laurenzio SAMBANY",
+				age:21
+			}
+		}
+	});
+
+	After that we can output those variables in the html.
+
+	HTML:
+	<div id="app">
+        <p>{{ title }} - {{ author }} - {{age}}</p>
+    </div>
+
+	c) -  Listening to Events:
+	We can use the "v-on" directive to listen the DOM events and run some 
+	Javascript when they're triggered
+		Example Click Events:
+		There are 2 ways to listen click events. The following code shows up how
+		to use them.
+
+		<div id="app">
+			<p>{{ title }} - {{ author }} - {{age}}</p>
+			<h2>Listening Events</h2>
+
+			#Option 1: 
+			<button v-on:click="age++">increase age</button>
+			<button v-on:click="age--">decrease age</button>
+
+			#Option 2: 
+			<div @click="title= 'I\'ve Changed the title' ">Change The title</div>
+		</div>
+
+	   - Method Event handlers:
+	   In html:
+	   <button @click="clickMe">Click me!</button>
+
+	   In JS: 
+	   we need to add this code
+	    methods: {
+			clickMe: function(){
+				alert('hey Guy! you cliked me!')
+			}
+		}
+
+		NB: When we click the button, that action calls our method clickMe
+
+		const app = Vue.createApp({
+			data(){
+				return {
+					title:"Learning Vue.js from scratch to pro",
+					author:"Laurenzio SAMBANY",
+					age:21
+				}
+			},
+			methods: {
+				clickMe: function(){
+					this.title= "You clicked me!"
+				}
+			},
+		});
+	d) Conditional rendering:
+	- The directive : "v-if":
+	=> It used to conditionally render a block. The block will only be rendered
+	if the directive's expression returns a truthy value.
+	Example: you can find out the example of code in the app.js file
+
+	e) Mouse Events:
+	- mouseover
+	- mouseleave
+	- double click
+	- mousemove
+	If you wanna pass a parameter in the function and handle the event, first pass the event parameter
+	and then the parameter that you need 
+
+	f) Outputting lists:
+	we can use "v-for" directive to render a list of items based on an array.
+	Example:
+	<div v-for="book in books" :key="book.title">
+        <p>{{ book.title }} - {{ book.author}}</p>
+    </div>
+
+	g) Attribute binding:
+	When we bind dynamic value to HTML attribute. For that we use "v-bind" attribute.
+	<a v-bind:href="url">Best website ever</a><br>
+    <a :href="url">Best website ever</a>
+
+	<ul>
+        <li v-for="book in books" :key="book.title">
+            <img :src="book.img" :alt="book.title" class="book">
+            <h3>{{ book.title }}</h3>
+            <p>{{ book.author}}</p>
+        </li>
+    </ul>
+
+	NB: attributes: href, if, class, src, alt ...
+
+	h) Challenge Toggling Fav:
+	I've done the Challenge with success.
+	(about toggleisFav)
+
+	j) Computed properties
+
+7- The vue CLI
+ To install the vue CLI globally in our PC, we should run the following command on 
+ the terminal.
+ > npm install -g @vue/cli
+
+ When the vue cli is install on our PC, we can generate vue app project by running
+ the following command
+ > vue create vue_app_name
+
+ Benefits with vue CLI:
+	* it's able to use modern javascript features
+	* Provide us a live-reload dev server
+	* Optimize our code for production
+
+	a) New Project WalkThrough
+	A vue file is separate into 3:
+		- template
+		- script
+		- style
+	b) template refs:
+	add classes, remove classes
+	To get all refs in our DOM we use this.$refs
+	//To add a class into a ref
+    this.$refs.name.classList.add('your_class_name');
+	
+	//To remove a class
+	this.$refs.name.classList.remove('active');
+	
+	//To get the value of input
+	this.$refs.name.value
+
+	c) Multitple components:
+	Root component
+	Parent component
+	Child component
+	Component tree
+
+	=> The component tree: is a simple organization structure tree
+	based on vue.js 
+
+	The conventional name of a vue.js file should start with a capital 
+	letter.
+
+	NB: 
+	- If we use scoped in style in a child component to not overwrite 
+	stylesheet in the parent component.
+	- If we use a global style for all components we need to create a
+	css file in assets folder and import it in the main.js file.
+	This css works anywhere...
+
+	d)Props:
+	We use props to pass data or informations from a parent component to 
+	a child component.
+
+	- What is props??
+	=> "Props" is a special keyword which stands for properties. It can be
+	registered on a component to pass data from a parent component to one 
+	of its child component.
+
+	- How to register props inside a component?
+	=> There are 2 ways to register props inside a component. The fist one use an
+	array to list them and second one we can list props as an object specifying
+	their types. 
+
+	Examples:
+	<Modal header="Sign up for the Giveaway!" content="Grab your ninja swag for half price!"/>
+
+	As we can see header and content are the props of the Modal components.
+	We can also pass an array, an object, a function in a props...
+	
+	e) Emitting Custom Events:
+	=> To emit our custom event we can use $emit function. The following example shows
+	us how to use it.
+	Example:
+	<div class="backdrop" @click="toggleCloseModal">
+        <div class="modal" :class="{sale: theme === 'sale'}">
+            <h1>{{ header }}</h1>
+            <p>{{ content }}</p>
+        </div>
+    </div>
+	-------------------- Template ---------------------
+	 methods:{
+        toggleCloseModal: function(){
+            this.$emit('close');
+        }
+    }
+	------------------- Method ---------------------
+	In the parent component
+	=> <Modal :header="header" :content="content" theme="sale" @close="toggleModal"/>
+
+	f) Click event modifiers:
+	- self
+	- right, left, shift, ctrl, alt, ...
+
+	g) Slots
+	A slot is useful to passing a template into a component. 
+
+	- using a default slot
+	<Modal theme="sale" @close="toggleModal">
+	<!-- Template --->
+     <h1>{{ header }}</h1>
+     <p>{{ content }}</p>
+   </Modal>
+
+	<!-- Using Slot To pass the template from the parent component to one of its child
+	Component-->
+   <div class="modal" :class="{sale: theme === 'sale'}">
+        <slot></slot>
+   </div>
+
+   - add a name slot
+ 	Parent Component
+	 <template v-slot:links>
+       <a href="/">Sign up</a>
+       <a href="/">More info</a>
+     </template>
+	
+	Child Component
+	<slot name="links"></slot>
+
+	NB: We use slotProps to pass data from child component to Parent in slot by binding the data.
+	this an example:
+	=> child
+	<slot name="footer" v-bind:user="user"></slot>
+	=> parent
+	<template v-slot:footer="slotProps">
+         <p>This footer is made by {{ slotProps.user.nom }}</p>
+    </template>
+
+	Another example
+	<template v-slot:footer="{user}">
+         <p>This footer is made by {{ user.nom }}</p>
+    </template>
+
+	<template v-slot:footer="{user:person}">
+         <p>This footer is made by {{ person.nom }}</p>
+    </template>
+
+	NB: 
+	- v-slot can be replaced by #
+	- v-bind can be replaced by :
+	- v-on can be replaced by @
+	so v-slot:header can be rewritten as #header 
+
+	Example:
+	<template #footer="{user}">
+        <p>This footer is made by {{ user.nom }}</p>
+    </template>
+
+	h) Challenge
+	I've done the Challenge with success. See the code inside the Modal.vue file and App.vue
+
+	i)Usign Teleport:
+	One of the Vue3 features, it allows us to Teleport a component
+
+	 <teleport to=".modals" v-if="showModal">
+      <Modal theme="sale" @close="toggleModal">
+        <h1>{{ header }}</h1>
+        <p>{{ content }}</p>
+        <template v-slot:links>
+          <a href="/">Sign up</a>
+          <a href="/">More info</a>
+        </template>
+      </Modal>
+    </teleport>
+
+	in this cas we teleport the modal component in a DOM element "modals" class
+
+8- Project timer Reaction: 
+	
+	a) Starting a new game:
+	 The goal of this project is to handle the loading state of our component.
+
+	b) Lifecycle of Hooks:
+	It's a function to allow users to create their own code at the specific stages. 
+	http://localhost:8081/guide/instance.html#lifecycle-hooks 
+	Check out the lifecycle diagram in the link above, it'll show up all different Hooks that we can use 
+	to add our own code.
+	Hooks: 
+		- beforeCreate
+		- created
+		- beforeMount
+		- mounted : we can use this hook when our component was mounted to the DOM
+		- beforeUpdate : it'll be fired before the data change
+		- updated : fired after a data inside a component was update
+		- beforeUnmounted
+		- unmounted : this hook will be fired when a component is unmounted on the DOM.
+		=> we use it when we work with vue-router
+
+	Example:
+	export default {
+		name:"Block",
+		props:['delay'],
+		data(){
+			return{
+				showBlock:false
+			}
+		},
+		mounted(){
+			console.log("Component mounted");
+			console.log(this.delay)
+			setTimeout(()=>{
+				this.showBlock = true;
+				console.log(this.showBlock);
+			}, this.delay)
+		},
+		updated(){
+			console.log("Component updated");
+		},
+		unmounted(){
+			console.log('Component unmounted')
+		}
+	}
+
+	c) Creating a timer:
+	e) Custom Events with data:
+	Child => parent - binding
+					- custom event
+	This is an example
+	this.$emit('end', this.reactionTime);
+
+	f) Challenge:
+	I've the Challenge with success!
+
+9) Handle Form and inputs: (Form input bindings)
+	=> We can use the "v-model" directive to create two-way data binding on
+	form input, textarea, and select element.
+	
+	=> Notice that the "v-model" will ignore the initial value, checked or selected
+	attributes found on any form element. So we should declare the initial value inside
+	the data option of our component.
+
+	=> "v-model" uses different properties and emits different events for different input 
+	elements:
+		---------------------------------------------------------
+		-      Type      -      Property      -      Event      -
+		---------------------------------------------------------
+		-  Text/textarea -        Value       -   input event   -
+		---------------------------------------------------------
+		-  Checkboxes\   -                    -                 -
+		-  radiobuttons  -       Checked      -   change event  -
+		---------------------------------------------------------
+		-  select field  -       Checked      -   change event  -
+		---------------------------------------------------------
+
+	a) two-way data binding on form input:
+	=> this is way to track what user types into an input field.
+	"v-model" allows us to sync the value of the form element's initial value declared inside 
+	the data option of our component.
+
+	Example:
+	<form>
+       <label>Email:</label>
+       <input type="email" required v-model="email">
+
+       <label>Password:</label>
+       <input type="password" required v-model="password">
+    </form>
+
+	data(){
+        return{
+            email:'',
+            password:''
+        }
+    }
+	=> email and password are tracking the value typed by the user
+	in the input form element.
+
+	b) Select boxes:
+	<label>Role</label>
+       <select v-model="role">
+           <option value="developer">Web developer</option>
+           <option value="designer">Web designer</option>
+       </select>
+
+	data(){
+        return{
+            role:''
+        }
+    }
+
+	We can add a default value in the select box:
+	data(){
+        return{
+            role:'designer'
+        }
+    }
+
+	c) Checkboxes:
+		- Single checkbox:
+		 <div class="terms">
+           <input type="checkbox" required v-model="terms">
+           <label>Accept terms and conditions</label>
+         </div>
+
+		 data(){
+			return{
+				terms: false
+			}
+		 }
+		
+		- Multiple checkbox:
+		<div>
+            <div>
+                <input type="checkbox" value="sambany" v-model="checkedNames">
+                <label>sambany</label>
+            </div>
+            <div>
+                <input type="checkbox" value="michel" v-model="checkedNames">
+                <label>michel</label>
+            </div>
+            <div>
+                <input type="checkbox" value="laurenzio" v-model="checkedNames">
+                <label>laurenzio</label>
+            </div>
+        </div>
+
+		data(){
+			return{
+				checkedNames:[]
+			}
+		}
+	
+	d) Keyboard event:
+	e) Challenge deleting skills
+	I've done the challenge successfully!
+
+10- Getting starter with vue-router:
+=> npm i vue-router
+ Vue-router allows us to map our components to the routes to create a single
+ page application with vue.js.
+ For that we use:
+ 	- "router-link" component for navigation
+	-  specify the link by passing "to" prop
+ Example: <router-link to="\">Go Home</router-link>
+ => router-link will render "<a>" tag to a correct href attributes
+
+ a) router-link
+ It allows vue-router to change the URL without reloading the page
+ <router-link to="\">Go Home</router-link>
+
+ We can pass the route's name in the router-link
+ <router-link :to="{ name:'home' }">Go Home</router-link> (vivement recommendé )
+
+ b) router-view:
+ It displays the component that corresponds to the URL. We can place it anywhere.
+ the place where our components will be dynamically injected depending on the route
+ we visit.
+
+ d) All steps to create our app's router:
+	1- Define the root component
+	2- Define some routes (here we'll create some routes)
+	3- Create the router instance and pass the routes options
+	4- The last one is to mount the route instance
+	(app.use(router))
+
+	=> By calling app.use(router), we get access to:
+		- router with $this.router
+ e) Usign vue command line:
+ we can set up the routes inside the file src\router\index.js. Each route has 3 differents 
+ properties such as "path", "name" and "component".
+
+ f) createWebHistory function:
+ This function allows us to create a web history by using web hitory api in the browser.
+
+ g) Views folder:
+ in this folder our route component live.
+
+ h) Route Parameter:
+ Route parameter should be what ever we want. It's something like this
+ /job/:id
+
+ To get the route parameter: $route.params.parameterName
+
+ i) Dynamic links:
+ <router-link :to="{name:'routeName', params:{paramsName:'paramsNameValue'}}">
+	Dynamic links
+ </router-link>
+
+ We can access any route priority as a prop. 
+ {
+    path:'/jobs/:id',
+    name:'JobDetails',
+    component: JobDetails,
+	props:true
+ }
+ j) redirect to another route:
+ for that we need use redirect
+  {
+    path:'/all-jobs',
+    redirect:'/jobs'
+  }
+
+ k) Create 404 Page:
+  {
+    path:'/:catchAll(.*)',
+    name:'NotFound',
+    component: NotFound
+  }
+ 
+ l)Programmatic Navigation:
+ go back => $router.go(-1)
+ go forward => $router.go(1)
+
+ To redirect to another page => $router.push({name:'RouteName'})
+ 
+ Fetching Data:
+*****************
+ a) Using JSON server
+ First of all, we need to install globally json-server
+ >  npm i -g json-server
+
+ after that we can check our json-server by running the 
+ command :
+ > json-server --watch pathName
+ Example:
+ > json-server --watch data/db.json
+
+ We use Fecth API
+
+ Syntax:
+ //To get data
+ fetch(url).then(res => res.json())
+		   .then(data => console.log(data))
+		   .catch(err => console.log(err.message))
+
+---------------------------------------------------------------
+NB:
+	- data : pour les variables de binding
+	- computed : pour les variables calculées automatiquements
+	- created ou mounted: pour l'initialisation du composant
+---------------------------------------------------------------
+
+Composition API:
+  a) Why we use Composition API:
+  Composition API allows us to reorganize our code especially when
+  our application is getting to big. It's useful to extract 
+  repeatable part in our app to ensure the maintainability
+  and flexibility of our code.
+
+  - Advantage:
+	* Allows us to deal with such large application
+	  (sharing and reusing becomes especially important 
+	  in that case.)
+  
+  b) The basics of Composition API:
+  Now that we know the why we can get the how.
+  To start working with the Composition API we first need a place 
+  where we can actually use it. In a Vue component, we call this 
+  place the setup.
+
+  --------------------------------------------------------
+	NB:
+	- We should avoid using "this" inside "setup"
+	- "setup" is called before "data", "computed",
+	 "lifecycle hooks" and "method"
+  --------------------------------------------------------
+    - Using template Ref inside setup:
+	always import ref:
+	=> import { ref } from '@vue/reactivity'
+	
+	//Inside script
+	setup(){
+
+		let paragraphe1 = ref(null)
+
+		const handleClick = () =>{
+		console.log(paragraphe1, paragraphe1.value)
+		paragraphe1.value.classList.add('paragraphe1')
+		paragraphe1.value.textContent = 'Hello Team-iDev'
+		}
+		
+		return {
+		paragraphe1
+		}
+
+	}
+
+	// Inside template 
+	 <p ref="paragraphe1">Mon Paragraphe</p>
+
+
+	- Reactive variable with refs
+
+	/**
+     * Those variables are not reactive so to make em
+     * reactive we need to use refs
+     */
+    let name = "Laurenzio"
+    let age = 21
+
+	
+    /**
+     * But those are reactive
+     */
+    const name = ref("Laurenzio")
+    const age = ref(21)
+
+	==> to get the value: console.log(name.value) // laurenzio
+
+	--------------------------------------------------------
+	NB:
+		- We only use the value "variable.value" inside the 
+		setup property itself
+	--------------------------------------------------------
+
+	- Computed value:
+	computed property: pour les variables calculées, filtrées, customisées
+
+	const arrayFiltered = computed(()=>{
+      return names.value.filter((name)=> name.includes(search.value))
+    })
+
+	- watch and watchEffect:
+	watch : we can use this function when a variable changes.
+
+	- Lifecycle Hooks:
+
+
+	**********************************************************
+	NB: Install material  icon via npm
+	=> npm i material-icons --save
+
+	- import it in main.js:
+	import 'material-icons/iconfont/material-icons.css'	
+	**********************************************************
+	
+
+
+	--------------------------------------
+	  Transition and Animation with Vuejs
+	--------------------------------------
+	1- Enter and leave transitions:
+
+		a) Transitioning single elements / component
+		Vue.js provide us a wrapper component called "transition"
+		that wraps around whatever element we want animate.
+
+		<transition>
+			//Component or elements we want add an animation
+		</transition>
+
+		b) Transition classes
+		There are six classes for entering and leaving transitions:
+
+		- v-enter-from : starting state for enter.
+		- v-enter-active : active state for enter.
+						   This class can be used to define the duration, delay 
+						   and easing curve for the entering transition.
+
+		- v-enter-to : ending state for enter. 
+					   Describe the default position of our element	
+
+		- v-leave-from : starting state for leave.
+						 Describe the default position of our element
+		- v-leave-active : active state for leave.
+						   This class can be used to define the duration, delay 
+						   and easing curve for the leaving transition.
+		- v-leave-to : ending state for leave.
+
+		*********************************
+		NB: by default opacity is 1
+		*********************************
+		c) CSS Transition & CSS Animation:
+		=> transform: 
+			- translateX: mouvement en x
+			- translateY: mouvement en Y
+		
+		=> transition
+
+		Example:  
+	  <transition name="type_fade">
+          <div v-if="show">Hello Ninja!</div>
+      </transition>
+
+	   .type_fade-enter-from{
+        opacity: 0;
+		}
+		.type_fade-enter-active{
+			transition: all 2s ease-out;
+		}
+		.type_fade-enter-to{
+			opacity: 1;
+		}
+		.type_fade-leave-from{
+			opacity: 1;
+		}
+		.type_fade-leave-active{
+			transition: all 2s cubic-bezier(1, 0.5,0.8,1);
+		}
+		.type_fade-leave-to{
+			opacity: 0;
+		}
+
+		d) CSS Keyframes:
+		
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+

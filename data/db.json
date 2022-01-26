@@ -1,0 +1,14 @@
+{
+    "posts":[
+      {   "id":1,
+          "title":"Welcome to the blog", 
+          "body":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi ipsum sapiente voluptatum eius architecto labore exercitationem totam. Rerum possimus quaerat blanditiis accusamus iusto labore quia laboriosam nobis. Temporibus, adipisci iure!",
+          "tags":["webdev", "coding", "team-idev"]
+      },
+      { "id":2,
+        "title":"Top 5 CSS Tips", 
+        "body":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi ipsum sapiente voluptatum eius architecto labore exercitationem totam. Rerum possimus quaerat blanditiis accusamus iusto labore quia laboriosam nobis. Temporibus, adipisci iure!",
+        "tags":["webdev", "coding", "team-idev"]
+      }
+    ]
+}
