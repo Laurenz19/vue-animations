@@ -1,0 +1,104 @@
+**********************************
+    CSS Animations tutorial
+**********************************
+
+1- Transforms (2D & 3D):
+   CSS3 Transforms allow us to rotate, translate, scale and skew an element.
+   A transformation is an effect that lets an element change shape, size and position.
+
+   =>  2D: 
+   There are all methods for 2D Transform effect that we need to know:
+   - translate()
+   - rotate()
+   - scale()
+   - skewX()
+   - skewY()
+   - matrix()
+
+   a) translate() method:
+   Moves an element from its current position.
+   div {
+        -ms-transform: translate(50px, 100px); /* IE 9 */
+        -webkit-transform: translate(50px, 100px); /* Safari */
+        transform: translate(50px, 100px);
+    }
+
+   b) rotate() method:
+   Rotates an element clockwise.
+
+   div {
+        -ms-transform: rotate(20deg); /* IE 9 */
+        -webkit-transform: rotate(20deg); /* Safari */
+        transform: rotate(20deg);
+    }
+
+   c) scale() method:
+   Increases or decreases the size of an element (according to the parameters given for the width and height).
+   The following example increases the <div> element to be two times of its original width, and three times of
+   its original height: 
+
+   div {
+        -ms-transform: scale(2, 3); /* IE 9 */
+        -webkit-transform: scale(2, 3); /* Safari */
+        transform: scale(2, 3);
+    }
+   
+   d) THe matrix
+   The matrix() method combines all the 2D transform methods into one.
+
+   The parameters are as follow: matrix(scaleX(),skewY(),skewX(),scaleY(),translateX(),translateY())
+    Example
+    div {
+        -ms-transform: matrix(1, -0.3, 0, 1, 0, 0); /* IE 9 */
+        -webkit-transform: matrix(1, -0.3, 0, 1, 0, 0); /* Safari */
+        transform: matrix(1, -0.3, 0, 1, 0, 0);
+    } 
+
+2- Transition:
+
+    div.circle{
+        border-radius: 50%;
+        height: 60px;
+        width: 100px;
+        margin: 70px auto;
+        padding-top: 40px;
+        background-color: pink;
+        color: white;
+        cursor: pointer;
+        -webkit-transition: -webkit-transform 2s;
+        transition: transform 1s ease-in-out, background-color 1s;
+    }
+
+    div.circle:hover{
+        -webkit-transform: scale(1.1, 1.1) rotate(360deg);
+        transform: scale(1.1, 1.1) rotate(360deg);
+        background-color: palevioletred;
+    }
+
+3- keyframes:
+
+    Syntax:
+    @keyframes animation_name{
+        from{}
+        to{}
+    }
+
+    @keyframes animation_name{
+        0%{}
+        ...
+        100%{}
+    }
+
+    div{
+        animation-name: animation_name;
+        animation-duration: duration;
+    }
+    
+    Fill mode: 
+    animation-fill-mode
+
+    transform-origin:
+    Check this link https://developer.mozilla.org/fr/docs/Web/CSS/transform-origin
+    La propriété transform-origin permet de modifier l'origine du 
+    repère pour les opérations de transformation d'un élément.
+
