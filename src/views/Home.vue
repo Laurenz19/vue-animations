@@ -30,7 +30,7 @@ export default {
                  showNotification.value = false
             },5000)
         }
-        
+         
         return{
             handleError, showNotification, show
         }
@@ -39,13 +39,34 @@ export default {
 </script>
 
 <style>
-   .notification-enter-from{
+
+    /* Custom animations */
+    @keyframes shake {
+       0%{
+           transform: translateY(-60px);
+           opacity: 0; 
+       }
+       50%{
+           transform: translateY(5 px);
+           opacity: 1;
+       }
+       60%{transform: translateX(8px);}
+       70%{transform: translateX(-8px);}
+       80%{transform: translateX(4px);}
+       90%{transform: translateX(-4px);}
+       100%{transform: translateX(0px);}
+   }
+    
+   /* Enter Classes */ 
+   /*.notification-enter-from{
        transform: translateY(-60px);
        opacity: 0;
-   }
+   }*/
    .notification-enter-active{
-       transition: all 2s ease;
+       animation: shake 0.5s ease;
    }
+
+   /* Leave classes*/
    .notification-leave-active{
         transition: all 2s ease;
    }

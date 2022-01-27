@@ -146,6 +146,62 @@
     .transition_name-enter-active                    .transition_name-leave-active    
     .transition_name-enter-to                        .transition_name-leave-to
 
+     .enter-to & leave-from // represent the default proprety of an element in the 
+     browser 
+
+     4- Adding CSS KeyFrame animation:
+     this is how to add a css keyframe animation
+
+      /* Custom animations */
+    @keyframes shake {
+       0%{
+           transform: translateY(-60px);
+           opacity: 0; 
+       }
+       50%{
+           transform: translateY(5 px);
+           opacity: 1;
+       }
+       60%{transform: translateX(8px);}
+       70%{transform: translateX(-8px);}
+       80%{transform: translateX(4px);}
+       90%{transform: translateX(-4px);}
+       100%{transform: translateX(0px);}
+   }
     
+   /* Enter Classes */ 
+   /*.notification-enter-from{
+       transform: translateY(-60px);
+       opacity: 0;
+   }*/
+   .notification-enter-active{
+       animation: shake 0.5s ease;
+   }
+
+    5- Transition-group:
+    wraps a list of elements that we want to add an animation
+     
+     <transition-group tag="ul" name="todo-list" appear>
+                <li v-for="todo in allTodos" :key="todo.id" @click="deleteTodo(todo.id)">
+                    {{todo.title}}
+                </li>
+     </transition-group>
+    
+    6- transitioning between 2 elements:
+     <transition name="switch" mode="out-in">
+        <div  v-if="allTodos.length">
+            <transition-group tag="ul" name="todo-list" appear>
+                <li v-for="todo in allTodos" :key="todo.id" @click="deleteTodo(todo.id)">
+                    {{todo.title}}
+                </li>
+            </transition-group>
+        </div>
+        <div v-else>
+            Woohoo, empty todo!
+        </div>
+     </transition>
+     
+     7- JavaScript Hook:
+     
 
 

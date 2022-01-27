@@ -1,16 +1,18 @@
 <template>
     <div class="todos">
-       <input type="text" placeholder="Add a new todo..." v-model="newTodo" @keypress.enter="addTodo">
+       <input type="text" placeholder="Add new todo..." v-model="newTodo" @keypress.enter="addTodo">
+        <transition name="switch" mode="out-in">
         <div  v-if="allTodos.length">
-            <ul>
+            <transition-group tag="ul" name="todo-list" appear>
                 <li v-for="todo in allTodos" :key="todo.id" @click="deleteTodo(todo.id)">
                     {{todo.title}}
                 </li>
-            </ul>
+            </transition-group>
         </div>
         <div v-else>
             Woohoo, empty todo!
         </div>
+        </transition>
     </div>
 </template>
 
@@ -83,4 +85,48 @@ export default {
     .todos li:hover{
         cursor: pointer;
     }
+
+    /* Custom animation */
+    @keyframes adding-todo {
+        0%{transform: scale(0.6); opacity: 0;}
+        100%{ transform: scale(1); opacity: 1;}
+    }
+
+    /* Todo list transition */
+
+    /* Enter */
+    .todo-list-enter-active{
+        animation: adding-todo 0.5s ease;
+    }
+
+    /* Leave*/
+    .todo-list-leave-active{
+        animation: all 0.1s ease;
+        position: absolute;
+    }
+    .todo-list-leave-to{
+        opacity: 0;
+    }
+
+    .todo-list-move{
+        transition: all 0.5s ease;
+    }
+
+    /* Swicth animation */
+    .switch-enter-from, .switch-leave-to{
+       transform: translateY(20px);
+        opacity:  0;
+    }
+    .switch-enter-to, .switch-leave-from {
+        transform: translateY(0px);
+        opacity:  1;
+    }
+    .switch-enter-active{
+        transition: all 0.4s ease;
+    }
+   
+    .switch-leave-active{
+       transition: all 0.4s ease;
+    }
+
 </style>
