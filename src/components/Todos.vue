@@ -30,6 +30,7 @@ export default {
             
             if(newTodo.value){
                  allTodos.value.push({id:id, title: newTodo.value})
+                 newTodo.value = '' 
             }else{
                 emit('EmptyInput')
             } 

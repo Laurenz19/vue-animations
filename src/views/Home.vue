@@ -28,7 +28,7 @@ export default {
             showNotification.value = true
             setTimeout(()=>{
                  showNotification.value = false
-            },3000)
+            },5000)
         }
         
         return{
@@ -40,25 +40,17 @@ export default {
 
 <style>
    .notification-enter-from{
+       transform: translateY(-60px);
        opacity: 0;
-       transform:translateY(-60px)
    }
    .notification-enter-active{
        transition: all 2s ease;
    }
-   /*.notification-enter-to{
-       opacity: 0;
-       transform: translate(0);
-   }
-   .notification-leave-from{
-       opacity: 0;
-       transform: translate(0);
-   }*/
    .notification-leave-active{
-       transition: all 2s ease;
+        transition: all 2s ease;
    }
    .notification-leave-to{
-       opacity: 0;
        transform: translateY(-60px);
+       opacity: 0;
    }
 </style>
